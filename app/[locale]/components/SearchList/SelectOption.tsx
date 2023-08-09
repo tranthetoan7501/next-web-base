@@ -1,6 +1,13 @@
-export default function SelectOption({ list }: { list?: any }) {
-  console.log(list);
-  const readonlyArray = [1, 2, 3] as const;
+import { useState } from "react";
+export default function SelectOption({
+  list,
+  defaultValue,
+  selectHandler,
+}: {
+  list?: any;
+  defaultValue: number;
+  selectHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}) {
   return (
     <>
       <div>
@@ -16,20 +23,25 @@ export default function SelectOption({ list }: { list?: any }) {
               fillRule="nonzero"
             />
           </svg>
-          <select className="border rounded-full shadow-lg mb-5 font-bold text-gray-600 h-10 pl-5 pr-10 bg-white w-96 dark:text-gray-400 dark:bg-slate-800 hover:border-gray-400 dark:border-slate-800 focus:outline-none appearance-none">
+          <select
+            className="border rounded-full shadow-lg mb-5 font-bold text-gray-600 h-10 pl-5 pr-10 bg-white w-96 dark:text-gray-400 dark:bg-slate-800 hover:border-gray-400 dark:border-slate-800 focus:outline-none appearance-none"
+            value={defaultValue}
+            onChange={selectHandler}
+          >
             <option className="dark:text-gray-400" key="-1" value="-1">
-              chọn giá trị
+              Chọn giá trị
             </option>
-            {list &&
-              list.map((option: any, index: number) => {
+            {list.map((option: any, index: number) => {
+              return (
                 <option
                   className="dark:text-gray-400"
                   key={index}
                   value={option.Id}
                 >
                   {option.Name}
-                </option>;
-              })}
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>

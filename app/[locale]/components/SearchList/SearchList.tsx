@@ -1,6 +1,6 @@
 "use client";
 import { Branch, Department, Position, User, UserListData } from "@/types";
-import UserList from "@/components/SearchList/UserList";
+import UserList from "@/app/[locale]/components/SearchList/UserList";
 import SearchBar from "./SearchBar";
 import SelectOption from "./SelectOption";
 import { useState } from "react";
@@ -33,25 +33,57 @@ export default function SearchList({ data }: { data: UserListData }) {
     return item.ParentId == departmentFilter;
   });
   const userList = dataUsers.filter((item) => {
+    let branchs: boolean =
+      branchFilter == -1 ? true : item.UnitId == branchFilter;
+    let department: boolean =
+      departmentFilter == -1 ? true : item.DepartmentId == departmentFilter;
+    let position: boolean =
+      positonFilter == -1 ? true : item.PosittionId == positonFilter;
     let hasChacracter: boolean =
       item.Name.toLowerCase().includes(searchContent.toLowerCase()) ||
       item.Email.toLowerCase().includes(searchContent.toLowerCase()) ||
       removeVietnameseDiacritics(item.DepartmentName).includes(
         removeVietnameseDiacritics(searchContent)
       );
-    return hasChacracter;
+    return hasChacracter && branchs && department && position;
   });
-  console.log("branchs", branchs);
+  function onBranchChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setBranchFilter(parseInt(event.target.value));
+    setDepartmentFilter(-1);
+    console.log(departmentFilter);
+    setPositonFilter(-1);
+  }
+  function onDepartmentChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setDepartmentFilter(parseInt(event.target.value));
+    setPositonFilter(-1);
+  }
+  function onPositionChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setPositonFilter(parseInt(event.target.value));
+  }
   return (
     <>
       <SearchBar content={searchContent} searchHandler={setSearcContent} />
-      {branchs && (
-        <div className="flex items-center justify-center p-3">
-          <SelectOption key="1" list={branchs} />
-          <SelectOption key="2" list={departmentsList} />
-          <SelectOption key="3" list={positionsList} />
-        </div>
-      )}
+
+      <div className="flex items-center justify-center p-3">
+        <SelectOption
+          key="1"
+          list={branchs}
+          selectHandler={onBranchChange}
+          defaultValue={branchFilter}
+        />
+        <SelectOption
+          key="2"
+          list={departmentsList}
+          selectHandler={onDepartmentChange}
+          defaultValue={departmentFilter}
+        />
+        <SelectOption
+          key="3"
+          list={positionsList}
+          selectHandler={onPositionChange}
+          defaultValue={positonFilter}
+        />
+      </div>
 
       <UserList list={userList} />
     </>
