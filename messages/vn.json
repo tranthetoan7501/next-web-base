@@ -1,5 +1,14 @@
 {
-  "Index": {
-    "home_title": "Danh sách liên lạc"
+  "Home": {
+    "home_title": "Danh sách liên lạc",
+    "home_contact_info": "Thông tin liên lạc",
+    "home_phone": "Số điện thoại",
+    "home_mobile": "Số cá nhân",
+    "home_workplace": "Nơi làm việc",
+    "home_email": "Email",
+    "home_search": "Tìm kiếm bằng số điện thoại hoặc email",
+    "home_all_branchs": "Tất cả chi nhánh",
+    "home_all_departments": "Tất cả phòng",
+    "home_all_positions": "Tất cả chức vụ"
   }
 }

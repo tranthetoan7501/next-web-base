@@ -1,0 +1,6 @@
+version: "3.8"
+services:
+  contact_list_nextjs:
+    image: test-nextjs:latest
+    ports:
+      - "3000:3000"

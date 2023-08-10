@@ -1,5 +1,7 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
+
 export default function SearchBar({
   content,
   searchHandler,
@@ -7,6 +9,7 @@ export default function SearchBar({
   content: string;
   searchHandler: (content: string) => void;
 }) {
+  const t = useTranslations("Home");
   const [value, setValue] = useState<string>(content);
   const onInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -27,7 +30,7 @@ export default function SearchBar({
             value={value}
             onChange={onInput}
             onKeyDown={onEnterEvent}
-            placeholder="Tìm kiếm theo tên, email, nơi làm việc"
+            placeholder={t("home_search")}
           />
 
           <div

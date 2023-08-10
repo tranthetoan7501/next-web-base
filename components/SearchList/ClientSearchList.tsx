@@ -1,10 +1,12 @@
 "use client";
 import { Branch, Department, Position, User, UserListData } from "@/types";
-import UserList from "@/app/[locale]/components/SearchList/UserList";
+import UserList from "@/components/SearchList/UserList";
 import SearchBar from "./SearchBar";
 import SelectOption from "./SelectOption";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 export default function SearchList({ data }: { data: UserListData }) {
+  const t = useTranslations("Home");
   const dataUsers: User[] = data.users
     .sort((a, b) => a.PosittionId - b.PosittionId)
     .sort((a, b) => a.DepartmentId - b.DepartmentId)
@@ -67,18 +69,21 @@ export default function SearchList({ data }: { data: UserListData }) {
       <div className="flex items-center justify-center p-3">
         <SelectOption
           key="1"
+          firstOption={t("home_all_branchs")}
           list={branchs}
           selectHandler={onBranchChange}
           defaultValue={branchFilter}
         />
         <SelectOption
           key="2"
+          firstOption={t("home_all_departments")}
           list={departmentsList}
           selectHandler={onDepartmentChange}
           defaultValue={departmentFilter}
         />
         <SelectOption
           key="3"
+          firstOption={t("home_all_positions")}
           list={positionsList}
           selectHandler={onPositionChange}
           defaultValue={positonFilter}

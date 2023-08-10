@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useLocale } from "next-intl";
+
 export default function SelectOption({
   list,
   defaultValue,
+  firstOption,
   selectHandler,
 }: {
   list?: any;
   defaultValue: number;
+  firstOption: string;
   selectHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }) {
+  const locale = useLocale();
   return (
     <>
       <div>
@@ -29,7 +33,7 @@ export default function SelectOption({
             onChange={selectHandler}
           >
             <option className="dark:text-gray-400" key="-1" value="-1">
-              Chọn giá trị
+              {firstOption}
             </option>
             {list.map((option: any, index: number) => {
               return (
@@ -38,7 +42,7 @@ export default function SelectOption({
                   key={index}
                   value={option.Id}
                 >
-                  {option.Name}
+                  {locale == "en" ? option.NameEn : option.Name}
                 </option>
               );
             })}

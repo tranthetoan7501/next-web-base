@@ -1,5 +1,14 @@
 {
-  "Index": {
-    "home_title": "Contact list"
+  "Home": {
+    "home_title": "Contact list",
+    "home_contact_info": "Contact info",
+    "home_phone": "Phone",
+    "home_mobile": "Mobile",
+    "home_workplace": "Workplace",
+    "home_email": "Email",
+    "home_search": "Search name or email",
+    "home_all_branchs": "All branchs",
+    "home_all_departments": "All departments",
+    "home_all_positions": "All positions"
   }
 }
